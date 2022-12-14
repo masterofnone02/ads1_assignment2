@@ -76,8 +76,8 @@ def filter_year_dataframe(data_frame):
 
 def bar_graph(col_df, row_df, title, xlbl, ylbl):
     """
-    This function plots a bar graph with the two dataframe passed as argument with
-    the title and labels.
+    This function plots a bar graph with the two dataframe passed as argument 
+    with the title and labels.
 
     Parameters
     ----------
@@ -196,10 +196,10 @@ def line_plot(data_frame, xlbl, ylbl):
     plt.ylabel(ylbl)
     plt.title("Overall labour force of top countries over the year 1990-2020",
               fontsize=9)
-    plt.savefig("Overall labour force of top countries over the year 1990-2020")
+    plt.savefig("Overall labour force")
     plt.show()
 
-
+ 
 def heatmap_df():
     """
     Function to generate the DataFrame for plotting the heatmap
@@ -291,8 +291,12 @@ male_serv_year, maleserv_count = read_data("Employment_in_serv_male.xls")
 fem_agr_year, femagr_count = read_data("Employment_in_agr_fem.xls")
 male_agr_year, maleagr_count = read_data("Employment_in_agr_male.xls")
 
+wage_labour_year, wage_labour_coun = read_data("Wage_Labour_Force_Wmn.xlsx")
+
+# Filtering the data
 filtered_data_total = filter_dataframes(labour_year)
 filtered_data_wmn = filter_dataframes(labour_wmn_year)
+filtered_data_wmn_waged = filter_dataframes(wage_labour_year)
 
 # Initialising an empty DataFrame
 empty = pd.DataFrame()
@@ -301,10 +305,12 @@ empty = pd.DataFrame()
 women_df = population_conversion(filtered_data_wmn, filtered_data_total, empty)
 
 
-# Plotting bar graph
+# Plotting bar graphs
 bar_graph(filtered_data_total, labour_coun, "Total Labour Force", "Countries",
           "Population")
 bar_graph(women_df, labour_wmn_coun, "Labour Force Women", "Countries",
+          "Population")
+bar_graph(filtered_data_wmn_waged , wage_labour_coun, "Wage Labour Force Women", "Countries",
           "Population")
 
 # Calculating mean of percentage for male employment in different sector using
@@ -327,7 +333,9 @@ mean_female_emplymnt = pd.DataFrame({'Employment': ["Emplmnt in services",
 
 # Plotting pie chart
 pie_chart(mean_male_emplymnt, mean_female_emplymnt)
+# Filtering dataframe for specific years
 filtered_df = filter_year_dataframe(filtered_data_total.transpose())
+# Plotting line graph
 line_plot(filtered_df, "Countries", "Years")
 # Generating dataframe for plotting heatmap
 heat_map = heatmap_df()
