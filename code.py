@@ -310,8 +310,8 @@ bar_graph(filtered_data_total, labour_coun, "Total Labour Force", "Countries",
           "Population")
 bar_graph(women_df, labour_wmn_coun, "Labour Force Women", "Countries",
           "Population")
-bar_graph(filtered_data_wmn_waged, wage_labour_coun, "Wage Labour Force Women", "Countries",
-          "Population")
+bar_graph(filtered_data_wmn_waged, wage_labour_coun, "Wage Labour Force Women",
+          "Countries", "Population")
 
 # Calculating mean of percentage for male employment in different sector using
 # numpy
